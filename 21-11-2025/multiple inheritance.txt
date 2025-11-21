@@ -1,0 +1,22 @@
+package nov21;
+interface Father {
+    void fatherTraits();
+}
+interface Mother {
+    void motherTraits();
+}
+class Child implements Father, Mother {
+    public void fatherTraits() {
+        System.out.println("Child got discipline from Father.");
+    }
+    public void motherTraits() {
+        System.out.println("Child got kindness from Mother.");
+    }
+}
+public class People {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.fatherTraits();
+        c.motherTraits();
+    }
+}
