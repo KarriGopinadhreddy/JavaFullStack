@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban Board</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #5D9CEC, #4A89DC, #967ADC);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      color: #fff;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    p.subtitle {
+      font-size: 14px;
+      margin-bottom: 25px;
+      color: rgba(255,255,255,0.8);
+    }
+    .board {
+      display: flex;
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+    .column {
+      flex: 1;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .column h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .task {
+      background: #fff;
+      color: #333;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .task h3 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #4A89DC;
+    }
+    .task p {
+      font-size: 13px;
+      color: #555;
+    }
+    .add-task {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 5px;
+    }
+    .add-task input, .add-task textarea {
+      border: none;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 13px;
+    }
+    .add-task button {
+      background: #E9573F;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .add-task button:hover {
+      background: #DA4453;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚠ Kanban Board</h1>
+  <p class="subtitle">A place to organise tasks to completion as well as add new ones and delete old ones.</p>
+
+  <div class="add-task">
+    <input id="title" placeholder="title..." />
+    <textarea id="desc" placeholder="description..."></textarea>
+    <button onclick="addTask()">Submit</button>
+  </div>
+
+  <div class="board">
+    <div class="column" id="backlog">
+      <h2>✔ Backlog</h2>
+    </div>
+    <div class="column" id="doing">
+      <h2>✔ Doing</h2>
+    </div>
+    <div class="column" id="done">
+      <h2>✔ Done</h2>
+    </div>
+    <div class="column" id="wontdo">
+      <h2>✔ Won’t Do</h2>
+    </div>
+  </div>
+
+  <script>
+    function addTask() {
+      const title = document.getElementById('title').value;
+      const desc = document.getElementById('desc').value;
+      if (!title || !desc) return;
+      const task = document.createElement('div');
+      task.className = 'task';
+      task.innerHTML = `<h3>${title}</h3><p>${desc}</p>`;
+      document.getElementById('backlog').appendChild(task);
+      document.getElementById('title').value = '';
+      document.getElementById('desc').value = '';
+    }
+  </script>
+</body>
+</html>
