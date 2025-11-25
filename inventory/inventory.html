@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventory Manager</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      min-height: 100vh;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      margin-right: 15px;
+      font-weight: 500;
+    }
+
+    .nav-left span {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #2a9d8f;
+    }
+
+    .clear-all {
+      background: #ef233c;
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .clear-all:hover {
+      background: #d90429;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 25px;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 15px 0;
+    }
+
+    .tabs button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      margin: 0 10px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .tabs button.active {
+      border-color: #fff;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 85%;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #fff;
+      margin-right: 5px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .btn.add { background: #06d6a0; }
+    .btn.add:hover { background: #05b68f; }
+
+    .btn.reset { background: #ef476f; }
+    .btn.reset:hover { background: #d63b5f; }
+
+    .btn.edit { background: #118ab2; }
+    .btn.edit:hover { background: #0e749d; }
+
+    .btn.delete { background: #ef233c; }
+    .btn.delete:hover { background: #d90429; }
+
+    input {
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin: 5px;
+      width: calc(25% - 12px);
+      font-size: 14px;
+    }
+
+    .search-box {
+      margin: 15px 0;
+      text-align: right;
+    }
+
+    .search-box input {
+      width: 220px;
+      border-radius: 20px;
+      padding: 6px 12px;
+      border: 1px solid #999;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table th, table td {
+      border: none;
+      padding: 12px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: #2a9d8f;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f0f9f8;
+    }
+
+    table tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    .clear-inventory {
+      background: #ef233c;
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .clear-inventory:hover {
+      background: #d90429;
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <span>Inventory Management</span>
+      <a href="#">Home</a>
+      <a href="#">More Info</a>
+      <a href="#">Login</a>
+      <a href="#">Register</a>
+    </div>
+    <button class="clear-all" onclick="clearAll()">Clear All</button>
+  </nav>
+
+  <h1>Inventory Manager</h1>
+
+  <div class="tabs">
+    <button class="active">Current Inventory</button>
+    <button>Incoming Purchase</button>
+    <button>Outgoing Orders</button>
+  </div>
+
+  <div class="container">
+    <h2>Current Inventory</h2>
+    <button class="clear-inventory" onclick="clearInventory()">Clear Inventory</button><br>
+
+    <div>
+      <input type="text" id="name" placeholder="Product Name">
+      <input type="text" id="brand" placeholder="Product Brand">
+      <input type="number" id="quantity" placeholder="Quantity">
+      <input type="text" id="price" placeholder="Product Price">
+      <button class="btn add" onclick="addProduct()">Add</button>
+      <button class="btn reset" onclick="resetForm()">Reset</button>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search product..." onkeyup="searchProduct()">
+    </div>
+
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    let products = JSON.parse(localStorage.getItem('inventory')) || [
+      { name: "Acer Nitro 7", brand: "Acer", quantity: 12, price: "$900" },
+      { name: "Asus ROG Strix 17", brand: "Asus", quantity: 8, price: "$1100" },
+      { name: "HP Pavilion 15", brand: "HP", quantity: 15, price: "$750" }
+    ];
+    let editIndex = null;
+
+    function renderTable() {
+      const tbody = document.querySelector('#inventoryTable tbody');
+      tbody.innerHTML = '';
+      products.forEach((product, index) => {
+        const row = `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${product.name}</td>
+            <td>${product.brand}</td>
+            <td>${product.quantity}</td>
+            <td>${product.price}</td>
+            <td>
+              <button class="btn edit" onclick="editProduct(${index})">Edit</button>
+              <button class="btn delete" onclick="deleteProduct(${index})">Delete</button>
+            </td>
+          </tr>`;
+        tbody.innerHTML += row;
+      });
+      localStorage.setItem('inventory', JSON.stringify(products));
+    }
+
+    function addProduct() {
+      const name = document.getElementById('name').value.trim();
+      const brand = document.getElementById('brand').value.trim();
+      const quantity = document.getElementById('quantity').value.trim();
+      const price = document.getElementById('price').value.trim();
+
+      if (!name || !brand || !quantity || !price) {
+        alert('Please fill all fields!');
+        return;
+      }
+
+      if (editIndex !== null) {
+        products[editIndex] = { name, brand, quantity, price };
+        editIndex = null;
+      } else {
+        products.push({ name, brand, quantity, price });
+      }
+
+      renderTable();
+      resetForm();
+    }
+
+    function resetForm() {
+      document.getElementById('name').value = '';
+      document.getElementById('brand').value = '';
+      document.getElementById('quantity').value = '';
+      document.getElementById('price').value = '';
+    }
+
+    function deleteProduct(index) {
+      products.splice(index, 1);
+      renderTable();
+    }
+
+    function editProduct(index) {
+      const product = products[index];
+      document.getElementById('name').value = product.name;
+      document.getElementById('brand').value = product.brand;
+      document.getElementById('quantity').value = product.quantity;
+      document.getElementById('price').value = product.price;
+      editIndex = index;
+    }
+
+    function clearInventory() {
+      products = [];
+      renderTable();
+    }
+
+    function clearAll() {
+      localStorage.clear();
+      products = [];
+      renderTable();
+    }
+
+    function searchProduct() {
+      const searchValue = document.getElementById('search').value.toLowerCase();
+      const rows = document.querySelectorAll('#inventoryTable tbody tr');
+      rows.forEach(row => {
+        const productName = row.cells[1].textContent.toLowerCase();
+        row.style.display = productName.includes(searchValue) ? '' : 'none';
+      });
+    }
+
+    renderTable();
+  </script>
+
+</body>
+</html>
