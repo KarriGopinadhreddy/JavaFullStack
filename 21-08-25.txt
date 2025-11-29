@@ -1,0 +1,21 @@
+CREATE DATABASE sathyabama;
+USE sathyabama;
+CREATE TABLE student(
+    s_id INT PRIMARY KEY,
+    s_name VARCHAR(30),
+    s_email VARCHAR(30),
+    s_phno INT,
+    s_dept VARCHAR(40)
+);
+INSERT INTO student(s_id, s_name, s_email, s_phno, s_dept)
+VALUES
+(1, 'gopi', 'gopi@gmail.com', 1234567890, 'cse'),
+(2, 'prasad', 'prasad@gmail.com', 123456789, 'cse'),
+(3, 'jayanth', 'jayanth@gmail.com', 1234509876, 'ece');
+SELECT * FROM student;
+ALTER TABLE student ADD COLUMN age INT;
+ALTER TABLE student DROP COLUMN s_dept;
+ALTER TABLE student MODIFY COLUMN s_email VARCHAR(30);
+ALTER TABLE student RENAME TO students;
+ALTER TABLE students DROP COLUMN ph_no;
+SELECT * FROM students;

@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class GradeRectangleAbsolute {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input marks and print grade
+        System.out.print("Enter marks: ");
+        double marks = scanner.nextDouble();
+        char grade;
+        if (marks < 25) {
+            grade = 'F';
+        } else if (marks < 45) {
+            grade = 'E';
+        } else if (marks < 50) {
+            grade = 'D';
+        } else if (marks < 60) {
+            grade = 'C';
+        } else if (marks < 80) {
+            grade = 'B';
+        } else {
+            grade = 'A';
+        }
+        System.out.println("Grade: " + grade);
+
+        // Input length and breadth to check if it is a square
+        System.out.print("Enter length of rectangle: ");
+        double length = scanner.nextDouble();
+        System.out.print("Enter breadth of rectangle: ");
+        double breadth = scanner.nextDouble();
+        if (length == breadth) {
+            System.out.println("It is a square.");
+        } else {
+            System.out.println("It is not a square.");
+        }
+
+        // Input a number and print its absolute value
+        System.out.print("Enter a number to find its absolute value: ");
+        double number = scanner.nextDouble();
+        double absoluteValue = Math.abs(number);
+        System.out.println("Absolute value: " + absoluteValue);
+
+        scanner.close();
+    }
+}

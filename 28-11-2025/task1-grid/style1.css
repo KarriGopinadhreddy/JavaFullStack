@@ -1,0 +1,23 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 90%;
+    margin: 50px auto;
+}
+
+.grid-item {
+    background-color: #AEC6CF;
+    padding: 20px;
+    min-height: 100px;
+    text-align: center;
+    font-size: 1.5em;
+    border-radius: 5px;
+}
+
+.span-item {
+    background-color: #FF6961;
+    color: white;
+    font-weight: bold;
+    grid-column: 1 / 4;
+}

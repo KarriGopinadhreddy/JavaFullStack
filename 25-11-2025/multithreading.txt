@@ -1,0 +1,235 @@
+Minutes & Seconds Program :
+
+package nov19;
+
+import java.util.Scanner;
+
+public class OMRKing {
+ 	public static void main(String args[]) {
+ 		// object creation for thread classes
+ 		Minute num = new Minute();
+ 		Seconds alp = new Seconds();
+
+ 		// start the thread
+ 		num.start();
+ 		alp.start();
+ 
+ 	}
+
+}
+
+class Minute extends Thread {
+ 	int a = 0;
+
+ 	public void run() {
+
+ 		try {
+ 			for (int i = 0; i <= 59; i++) {
+ 				try {
+ 				System.out.println("Minutes : " + a);
+ 				a++;
+ 				Thread.sleep(60000);
+ 				}
+ 				catch(Exception e) {
+ 					System.out.println(e);
+ 				}
+ 			}
+ 		} catch (Exception e) {
+ 			System.out.println(e);
+ 		}
+
+ 	}
+}
+
+class Seconds extends Thread {
+ 	int a=0;
+
+ 	public void run() {
+ 		try {
+ 			for (int i = 0; i <= 59; i++) {
+
+ 				try {
+ 				System.out.println("Seconds :" + a);
+ 				a++;
+ 				Thread.sleep(1000);
+ 				}
+ 				catch(Exception e) {
+ 					System.out.println("Issues in Minutes Thread class");
+ 				}
+ 			}
+ 		} catch (Exception e) {
+ 			System.out.println(e);
+ 		}
+
+ 	}
+}
+
+
+
+
+
+
+
+
+
+Number & Alphabet Thread :
+
+package nov25;
+
+public class ThreadDemo {
+    public static void main(String args[]) {
+
+        NumberThread num = new NumberThread();
+        AlphabetThread alp = new AlphabetThread();
+
+        num.start();
+        alp.start();
+
+        System.out.println("Number Thread : " + num.getName());
+        System.out.println("Alphabet Thread : " + alp.getName());
+
+        System.out.println("Number Thread Priority : " + num.getPriority());
+        System.out.println("Alphabet Thread Priority : " + alp.getPriority());
+
+        System.out.println("Number Thread State : " + num.getState());
+        System.out.println("Alphabet Thread State : " + alp.getState());
+
+        System.out.println("Current Thread : " + Thread.currentThread().getName());
+
+        num.setName("Jayanth");
+        alp.setName("Karthick");
+
+        System.out.println("Number Thread (After Name Change) : " + num.getState());
+        System.out.println("Alphabet Thread (After Name Change) : " + alp.getState());
+
+        if (num.isAlive()) {
+            System.out.println("Jayanth thread is Alive");
+        } else {
+            System.out.println("Jayanth Thread is Dead");
+        }
+
+        if (alp.isAlive()) {
+            System.out.println("Karthick thread is Alive");
+        } else {
+            System.out.println("Karthick Thread is Dead");
+        }
+    }
+}
+
+class NumberThread extends Thread {
+    int a = 0;
+
+    public void run() {
+        try {
+            for (int i = 0; i <= 10; i++) {
+                a++;
+                System.out.println("Number Thread : " + a);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+class AlphabetThread extends Thread {
+    char a = 'A';
+
+    public void run() {
+        try {
+            for (int i = 0; i <= 25; i++) {
+                System.out.println("Alphabet Thread : " + a);
+                a++;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+Number & Alphabet Thread (join(), priority, name change) :
+
+package nov25;
+
+public class ThreadDemo {
+    public static void main(String args[]) {
+        NumberThread num = new NumberThread();
+        AlphabetThread alp = new AlphabetThread();
+
+        System.out.println("Number Thread (before start) : " + num.getName());
+        System.out.println("Alphabet Thread (before start) : " + alp.getName());
+
+        num.start();
+        alp.start();
+
+        System.out.println("Number Thread Priority : " + num.getPriority());
+        System.out.println("Alphabet Thread Priority : " + alp.getPriority());
+
+        System.out.println("Current Thread : " + Thread.currentThread().getName());
+
+        num.setName("Jayanth");
+        alp.setName("Karthick");
+
+        try {
+            num.join();
+            alp.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        System.out.println("Number Thread (After join) State : " + num.getState());
+        System.out.println("Alphabet Thread (After join) State : " + alp.getState());
+
+        if (num.isAlive()) {
+            System.out.println("Jayanth thread is Alive");
+        } else {
+            System.out.println("Jayanth Thread is Dead");
+        }
+
+        if (alp.isAlive()) {
+            System.out.println("Karthick thread is Alive");
+        } else {
+            System.out.println("Karthick Thread is Dead");
+        }
+    }
+}
+
+class NumberThread extends Thread {
+    int a = 0;
+
+    public void run() {
+        try {
+            for (int i = 0; i <= 10; i++) {
+                a++;
+                System.out.println("Number Thread : " + a);
+                Thread.sleep(100);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+class AlphabetThread extends Thread {
+    char a = 'A';
+
+    public void run() {
+        try {
+            for (int i = 0; i <= 25; i++) {
+                System.out.println("Alphabet Thread : " + a);
+                a++;
+                Thread.sleep(100);
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}

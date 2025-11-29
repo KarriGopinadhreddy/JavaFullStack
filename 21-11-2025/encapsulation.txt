@@ -1,0 +1,16 @@
+package bank;
+
+class Bank {
+    private int balance;
+    void deposit(int amount) {
+        balance = balance + amount;
+    }
+    int getBalance() {
+        return balance;
+    }
+    public static void main(String[] args) {
+        Bank b = new Bank();
+        b.deposit(1000);                  
+        System.out.println(b.getBalance());
+    }
+}

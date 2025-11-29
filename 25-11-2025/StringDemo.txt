@@ -1,0 +1,14 @@
+package nov25;
+public class StringDemo {
+    public static void main(String[] args) {
+        String s = "Sathyabama";
+        s.concat(" College");
+        System.out.println(s);
+        StringBuffer sb1 = new StringBuffer("Sathyabama");
+        sb1.append(" College");
+        System.out.println(sb1);
+        StringBuilder sb2 = new StringBuilder("Sathyabama");
+        sb2.append(" College");
+        System.out.println(sb2);
+    }
+}

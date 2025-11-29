@@ -1,0 +1,15 @@
+package family;
+class FamilyMember {
+    FamilyMember() {
+        System.out.println("A new family member is created.");
+    }
+    FamilyMember(String name, String relation) {
+        System.out.println(name + " is the " + relation + " of the family.");
+    }
+}
+public class FamilyConstructor {
+    public static void main(String[] args) {
+        FamilyMember m1 = new FamilyMember();
+        FamilyMember m2 = new FamilyMember("Gopinath", "Son");
+    }
+}

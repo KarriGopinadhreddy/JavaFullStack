@@ -1,0 +1,18 @@
+package family;
+class Parent {
+    void duty() {
+        System.out.println("Parent takes care of the family.");
+    }
+}
+class Son extends Parent {
+    @Override
+    void duty() {
+        System.out.println("Son studies and helps the family.");
+    }
+}
+public class FamilyOverride {
+    public static void main(String[] args) {
+        Son s = new Son();
+        s.duty();
+    }
+}

@@ -1,0 +1,46 @@
+CREATE TABLE workers (
+    worker_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    department VARCHAR(50),
+    salary DECIMAL(15,2)
+);
+
+INSERT INTO workers (first_name, department, salary) VALUES
+('Varun', 'IT', 250000),
+('Amit', 'HR', 90000),
+('Vinay', 'Sales', 150000),
+('Riya', 'Admin', 80000),
+('Vikram', 'Marketing', 220000),
+('Sneha', 'Sales', 60000),
+('Priya', 'Admin', 130000),
+('Vishal', 'Finance', 190000),
+('Rahul', 'HR', 120000),
+('Kiran', 'IT', 76000);
+
+SELECT * FROM workers
+WHERE department NOT IN ('HR', 'Admin')
+  AND salary BETWEEN 70000 AND 300000;
+
+SELECT * FROM workers
+WHERE first_name LIKE 'V%'
+  AND salary >= 200000;
+
+SELECT * FROM workers
+WHERE department <> 'Admin'
+  AND salary < 100000;
+
+SELECT AVG(salary) AS avg_salary
+FROM workers
+WHERE department = 'Admin';
+
+SELECT SUM(salary) AS total_salary
+FROM workers
+WHERE department IN ('HR', 'Admin');
+
+SELECT COUNT(*) AS v_name_count
+FROM workers
+WHERE first_name LIKE 'V%';
+
+SELECT SUM(salary) AS total_salary
+FROM workers
+WHERE salary BETWEEN 50000 AND 200000;

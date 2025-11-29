@@ -1,0 +1,71 @@
+package nov25;
+
+import java.util.*;
+
+public class ArrayOperations {
+
+    public static void main(String[] args) {
+
+        int a[];
+        a = new int[40];
+
+        String[] aArray = new String[5];
+        String[] bArray = {"a","b","c","d","e"};
+        String[] cArray = new String[]{"a","b","c","d","e"};
+
+        int[] intArray = {1, 2, 3, 4, 5};
+        System.out.println(Arrays.toString(intArray));
+
+        String[] stringArray = {"a", "b", "c", "d", "e"};
+        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(stringArray));
+        System.out.println(arrayList);
+
+        String[] arrCheck = {"abc", "bcd", "cba", "dcb", "efg"};
+        boolean b = Arrays.asList(arrCheck).contains("abc");
+        System.out.println(b);
+
+        int[] intArray2 = {6, 7, 8, 9, 10};
+        int[] combined = new int[intArray.length + intArray2.length];
+        System.arraycopy(intArray, 0, combined, 0, intArray.length);
+        System.arraycopy(intArray2, 0, combined, intArray.length, intArray2.length);
+        System.out.println(Arrays.toString(combined));
+
+        String[] joinArr = {"a", "b", "c"};
+        String joined = String.join(", ", joinArr);
+        System.out.println(joined);
+
+        String[] listToArr = arrayList.toArray(new String[0]);
+        for (String s : listToArr)
+            System.out.println(s);
+
+        String[] s1 = {"a", "b", "c", "d", "e", "a"};
+        Set<String> set123 = new HashSet<>(Arrays.asList(s1));
+        System.out.println(set123);
+
+        int[] rev = {1, 2, 3, 4, 5};
+        for (int i = 0, j = rev.length - 1; i < j; i++, j--) {
+            int temp = rev[i];
+            rev[i] = rev[j];
+            rev[j] = temp;
+        }
+        System.out.println(Arrays.toString(rev));
+
+        int[] newArray = removeValue(rev, 3);
+        System.out.println(Arrays.toString(newArray));
+    }
+
+    static int[] removeValue(int[] arr, int value) {
+        int count = 0;
+        for (int x : arr)
+            if (x == value) count++;
+
+        int[] result = new int[arr.length - count];
+        int index = 0;
+
+        for (int x : arr)
+            if (x != value)
+                result[index++] = x;
+
+        return result;
+    }
+}
